@@ -24,12 +24,12 @@ public class TileSetReader {
 
     public static Tile parseEntry(String raw, LanternFactory lanternFactory) {
         Matcher matcher = PATTERN.matcher(raw);
+        matcher.find();
         String platform = matcher.group("PLATFORM");
         return Arrays.stream(Direction.values())
             .map(Direction::name)
             .map(matcher::group)
-            .map(lanternFactory::convert)
-            .map(lanternFactory::apply)
+            .map(lanternFactory::create)
             .collect(Collectors.collectingAndThen(
                 Collectors.toList(),
                 list -> new Tile(list.get(0), list.get(1), list.get(2), list.get(3), PLATFORM_MARKER.equals(platform))

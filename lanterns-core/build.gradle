@@ -1,3 +1,13 @@
 #!/bin/env groovy
 
-apply plugin: 'java-library'
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:6.10'
+}
+
+test {
+    useTestNG()
+}

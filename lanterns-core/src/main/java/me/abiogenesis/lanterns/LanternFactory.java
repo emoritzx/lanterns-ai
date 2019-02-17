@@ -15,7 +15,11 @@ public class LanternFactory {
             .collect(Collectors.toSet());
     }
 
-    public Lantern apply(Color value) {
+    public Lantern create(String raw) {
+        return create(convert(raw));
+    }
+
+    public Lantern create(Color value) {
         return lanterns.computeIfAbsent(value, Lantern::new);
     }
 
