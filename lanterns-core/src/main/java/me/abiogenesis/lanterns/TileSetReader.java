@@ -9,9 +9,8 @@ import java.util.stream.Collectors;
 
 public class TileSetReader {
 
-    public static final String PATTERN_FORMAT = "(?<PLATFORM>X)?\\s*(?<NORTH>\\p{Alnum}+)\\s+(?<EAST>\\p{Alnum}+)\\s+(?<SOUTH>\\p{Alnum}+)\\s+(?<WEST>\\p{Alnum}+)";
+    public static final String PATTERN_FORMAT = "(?:X:(?<PLATFORM>\\p{Alnum}+))?\\s*(?<NORTH>\\p{Alnum}+)\\s+(?<EAST>\\p{Alnum}+)\\s+(?<SOUTH>\\p{Alnum}+)\\s+(?<WEST>\\p{Alnum}+)";
     public static final Pattern PATTERN = Pattern.compile(PATTERN_FORMAT);
-    public static final String PLATFORM_MARKER = "X";
 
     public static TileSet read(BufferedReader tileStream, LanternFactory lanternFactory) throws IOException {
         Tile startTile = parseEntry(tileStream.readLine(), lanternFactory);
@@ -32,7 +31,7 @@ public class TileSetReader {
             .map(lanternFactory::create)
             .collect(Collectors.collectingAndThen(
                 Collectors.toList(),
-                list -> new Tile(list.get(0), list.get(1), list.get(2), list.get(3), PLATFORM_MARKER.equals(platform))
+                list -> new Tile(list.get(0), list.get(1), list.get(2), list.get(3), Optional.ofNullable(platform))
             ));
     }
 }

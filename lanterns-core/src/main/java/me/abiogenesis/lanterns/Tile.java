@@ -8,22 +8,22 @@ public class Tile {
 
     private final Map<Direction, Lantern> lanterns = new LinkedHashMap<>();
     private final Map<Direction, Tile> edges = new LinkedHashMap<>();
-    private final boolean hasPlatform;
+    private final Optional<String> platform;
 
-    public Tile(Lantern north, Lantern east, Lantern south, Lantern west, boolean hasPlatform) {
+    public Tile(Lantern north, Lantern east, Lantern south, Lantern west, Optional<String> platform) {
         lanterns.put(NORTH, north);
         lanterns.put(EAST, east);
         lanterns.put(SOUTH, south);
         lanterns.put(WEST, west);
-        this.hasPlatform = hasPlatform;
+        this.platform = platform;
     }
 
     public Lantern getLantern(Direction direction) {
         return lanterns.get(direction);
     }
 
-    public boolean hasPlatform() {
-        return hasPlatform;
+    public Optional<String> getPlatform() {
+        return platform;
     }
 
     public Optional<Tile> getEdge(Direction direction) {
