@@ -31,7 +31,7 @@ public class TileSetReader {
             .map(lanternFactory::create)
             .collect(Collectors.collectingAndThen(
                 Collectors.toList(),
-                list -> new Tile(list.get(0), list.get(1), list.get(2), list.get(3), Optional.ofNullable(platform))
+                list -> new Tile(list.get(0), list.get(1), list.get(2), list.get(3), platform)
             ));
     }
 }

@@ -27,4 +27,9 @@ public class Lantern {
     public int hashCode() {
         return Objects.hash(type);
     }
+
+    @Override
+    public String toString() {
+        return String.format("#%02X%02X%02X(%02X)", type.getRed(), type.getGreen(), type.getBlue(), type.getAlpha());
+    }
 }

@@ -46,10 +46,10 @@ public class Tile {
     public void rotate() {
         if (edges.isEmpty()) {
             Direction currentDirection = NORTH;
+            Lantern currentLantern = lanterns.get(currentDirection);
             do {
-                Lantern currentLantern = lanterns.get(currentDirection);
-                currentDirection.clockwise();
-                lanterns.put(currentDirection, currentLantern);
+                currentDirection = currentDirection.clockwise();
+                currentLantern = lanterns.put(currentDirection, currentLantern);
             } while (currentDirection != NORTH);
         } else {
             throw new IllegalStateException("Cannot rotate a tile with edges");
